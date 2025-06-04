@@ -11,15 +11,15 @@ public class TimerView : MonoBehaviour
     [SerializeField] private TimerService _timerService;
 
     private Timer _timer;
-    private const float _maxDuration = 10f;
-    private const float _minDuration = 0f;
+    private const float MaxDuration = 10f;
+    private const float MinDuration = 0f;
 
     private void Awake()
     {
         _timer = _timerService.Timer;
         
-        _timerSlider.maxValue = _maxDuration;
-        _timerSlider.minValue = _minDuration;
+        _timerSlider.maxValue = MaxDuration;
+        _timerSlider.minValue = MinDuration;
 
         _timer.OnTimerChanged += OnTimerChanged;
     }

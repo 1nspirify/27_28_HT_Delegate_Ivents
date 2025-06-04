@@ -10,8 +10,8 @@ public class EnemyCreator : MonoBehaviour
     private const KeyCode _key2 = KeyCode.Alpha2;
     private const KeyCode _key3 = KeyCode.Alpha3;
 
-    private const int _maxEnemies = 5;
-    private const float _lifetime = 5f;
+    private const int MaxEnemies = 5;
+    private const float Lifetime = 5f;
 
     public void Update()
     {
@@ -43,8 +43,8 @@ public class EnemyCreator : MonoBehaviour
 
         Func<bool> deathReason = type switch
         {
-            EnemyType.LifetimeElapsed => () => Time.time - bornTime > _lifetime,
-            EnemyType.LackOfSpace => () => _service.EnemiesSpawner.Count >= _maxEnemies,
+            EnemyType.LifetimeElapsed => () => Time.time - bornTime > Lifetime,
+            EnemyType.LackOfSpace => () => _service.EnemiesSpawner.Count >= MaxEnemies,
             EnemyType.LogicDeath => () => true, _ => () => false
         };
 
