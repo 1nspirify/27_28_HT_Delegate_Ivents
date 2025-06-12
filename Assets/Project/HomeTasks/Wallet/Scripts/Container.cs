@@ -5,10 +5,10 @@ public class Container : MonoBehaviour
 {
     public event Action OnCountChanged;
     private int _count;
-    public int Count => _count;
-
-    [SerializeField] private StorageType _type;
-    public StorageType Type => _type;
+    public int Count => _count; 
+    
+    [SerializeField] private CurrencyType _type;
+    public CurrencyType Type => _type;
 
     public void Increase(int amount)
     {

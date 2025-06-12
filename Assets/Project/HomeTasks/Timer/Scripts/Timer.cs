@@ -2,6 +2,7 @@ using System;
 
 public class Timer
 {
+    private const float MinCount = 0f;
     public event Action OnTimerChanged;
     public event Action OnTimerEnded;
 
@@ -21,14 +22,14 @@ public class Timer
 
     public void Update(float deltaTime)
     {
-        if (!_isRunning || _currentTime <= 0f)
+        if (!_isRunning || _currentTime <= MinCount)
             return;
 
         _currentTime -= deltaTime;
 
-        if (_currentTime <= 0f)
+        if (_currentTime <= MinCount)
         {
-            _currentTime = 0f;
+            _currentTime = MinCount;
             _isRunning = false;
             OnTimerEnded?.Invoke();
         }
@@ -48,7 +49,7 @@ public class Timer
 
     public void Stop()
     {
-        _currentTime = 0f;
+        _currentTime = MinCount;
         _isRunning = false;
         OnTimerChanged?.Invoke();
     }

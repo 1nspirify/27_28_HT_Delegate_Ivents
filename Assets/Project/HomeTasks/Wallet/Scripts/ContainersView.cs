@@ -7,11 +7,11 @@ public class ContainersView : MonoBehaviour
     [SerializeField] private List<Container> _containers;
     [SerializeField] private List<StorageUIView> _uiElements;
 
-    private Dictionary<StorageType, TMP_Text> _uiMap;
+    private Dictionary<CurrencyType, TMP_Text> _uiMap;
 
     private void Awake()
     {
-        _uiMap = new Dictionary<StorageType, TMP_Text>();
+        _uiMap = new Dictionary<CurrencyType, TMP_Text>();
 
         foreach (StorageUIView ui in _uiElements)
         {

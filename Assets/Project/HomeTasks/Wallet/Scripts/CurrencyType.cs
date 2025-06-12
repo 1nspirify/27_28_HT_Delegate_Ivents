@@ -1,5 +1,5 @@
 
-public enum StorageType
+public enum CurrencyType
 {
     Coins,
     Energy,

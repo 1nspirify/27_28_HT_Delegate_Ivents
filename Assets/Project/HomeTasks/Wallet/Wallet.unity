@@ -271,17 +271,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 248019068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a5dc430e4be04236bdff4188524c1b9, type: 3}
+  m_Script: {fileID: 11500000, guid: c8b59cfbcc55948049a5d66b6041adfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _containers:
-  - {fileID: 1441569923}
-  - {fileID: 1439385732}
-  - {fileID: 1836377313}
-  _uiElements:
-  - {fileID: 1084658260}
-  - {fileID: 810959303}
-  - {fileID: 1626732952}
+  _coins: {fileID: 1084658258}
+  _energy: {fileID: 810959301}
+  _crystals: {fileID: 1626732950}
 --- !u!1 &265352039
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,14 +951,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1131987026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 088a10c25a5eb4a13a9a60f6015b7dec, type: 3}
+  m_Script: {fileID: 11500000, guid: a6ec3354dad894bff9a5b61b9a8a1e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _containers:
-  - {fileID: 1441569923}
-  - {fileID: 1439385732}
-  - {fileID: 1836377313}
-  _containersView: {fileID: 248019071}
+  _walletView: {fileID: 248019071}
 --- !u!1 &1439385730
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,12 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerService : MonoBehaviour
+public class TimerExample : MonoBehaviour
 {
+    [SerializeField] private List<TimerView> _timerViews = new();
     public Timer Timer { get; private set; }
 
     private void Awake()
     {
         Timer = new Timer(10f);
+    }
+
+    private void Start()
+    {
+        foreach (TimerView timerView in _timerViews)
+        {
+            timerView.Initialize(Timer);
+        }
     }
 
     private void Update()

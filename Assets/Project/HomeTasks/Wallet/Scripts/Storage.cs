@@ -3,50 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Storage : MonoBehaviour
+public class Storage 
 {
-    private StorageType _storageType;
+    private CurrencyType _currencyType;
     [SerializeField] private List<Container> _containers;
-    [SerializeField] private ContainersView _containersView;
-
-    private void Awake()
-    {
-        if (_containersView)
-            _containersView.gameObject.SetActive(true);
-    }
-
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            _storageType = StorageType.Coins;
+            _currencyType = CurrencyType.Coins;
             Debug.LogWarning("Coins Storage has been chosen");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            _storageType = StorageType.Energy;
+            _currencyType = CurrencyType.Energy;
             Debug.LogWarning("Energy Storage has been chosen");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            _storageType = StorageType.Crystals;
+            _currencyType = CurrencyType.Crystals;
             Debug.LogWarning("Crystals Storage has been chosen");
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            ApplyToStorage(_storageType, (container, amount) => container.Increase(amount));
+            ApplyToStorage(_currencyType, (container, amount) => container.Increase(amount));
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            ApplyToStorage(_storageType, (container, amount) => container.Decrease(amount));
+            ApplyToStorage(_currencyType, (container, amount) => container.Decrease(amount));
         }
     }
 
-    private void ApplyToStorage(StorageType type, Action<Container, int> action)
+    private void ApplyToStorage(CurrencyType type, Action<Container, int> action)
     {
         int amount = Random.Range(0, 11);
         foreach (Container container in _containers)
@@ -56,11 +49,5 @@ public class Storage : MonoBehaviour
                 action?.Invoke(container, amount);
             }
         }
-    }
-
-    private void OnDisable()
-    {
-        if (_containersView)
-            _containersView.gameObject.SetActive(false);
     }
 }
