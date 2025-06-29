@@ -8,7 +8,7 @@ public class TimerHeartView : TimerView
     
     protected override void UpdateUI()
     {
-        float current = _timer.CurrentTime;
+        float current = _timer.CurrentTime.Value;
 
         for (int i = 0; i < _timerImages.Count; i++)
         {

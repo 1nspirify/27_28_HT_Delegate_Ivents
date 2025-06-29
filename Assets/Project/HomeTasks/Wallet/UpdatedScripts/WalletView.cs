@@ -17,28 +17,32 @@ public class WalletView : MonoBehaviour
         _energy.text = wallet.GetValue(Wallet.CurrencyType.Energy).ToString();
         _crystals.text = wallet.GetValue(Wallet.CurrencyType.Crystals).ToString();
 
-        _wallet.OnCountChanged += OnCountChanged;
+         _wallet.GetReactive(Wallet.CurrencyType.Coins).Changed += OnCoinsChanged;
+        _wallet.GetReactive(Wallet.CurrencyType.Energy).Changed += OnEnergyChanged;
+        _wallet.GetReactive(Wallet.CurrencyType.Crystals).Changed += OnCrystalsChanged;
     }
 
-    private void OnCountChanged(Wallet.CurrencyType type, int value)
+    private void OnCoinsChanged(int oldValue, int newValue)
     {
-        switch (type)
-        {
-            case Wallet.CurrencyType.Coins:
-                _coins.text = value.ToString();
-                break;
-            case Wallet.CurrencyType.Energy:
-                _energy.text = value.ToString();
-                break;
-            case Wallet.CurrencyType.Crystals:
-                _crystals.text = value.ToString();
-                break;
-        }
+        _coins.text = newValue.ToString();
+    }
+
+    private void OnEnergyChanged(int oldValue, int newValue)
+    {
+        _energy.text = newValue.ToString();
+    }
+
+    private void OnCrystalsChanged(int oldValue, int newValue)
+    {
+        _crystals.text = newValue.ToString();
     }
 
     private void OnDestroy()
     {
-        _wallet.OnCountChanged -= OnCountChanged;
+        _wallet.GetReactive(Wallet.CurrencyType.Coins).Changed -= OnCoinsChanged;
+        _wallet.GetReactive(Wallet.CurrencyType.Energy).Changed -= OnEnergyChanged;
+        _wallet.GetReactive(Wallet.CurrencyType.Crystals).Changed -= OnCrystalsChanged;
+        
         gameObject.SetActive(false);
     }
 }

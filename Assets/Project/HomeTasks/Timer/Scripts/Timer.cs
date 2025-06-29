@@ -4,37 +4,33 @@ public class Timer
 {
     private const float MinCount = 0f;
     public event Action OnTimerChanged;
-    public event Action OnTimerEnded;
+    public ReactiveVariable<float> CurrentTime { get; } = new (0f);
 
     private float _duration;
     private float _currentTime;
     private bool _isRunning;
-
-    public float CurrentTime => _currentTime;
+    private float _initialTime;
     public bool IsRunning => _isRunning;
 
     public Timer(float duration)
     {
-        _duration = duration;
-        _currentTime = duration;
+        _initialTime = duration;
+        CurrentTime.Value = duration;
         _isRunning = false;
     }
 
     public void Update(float deltaTime)
     {
-        if (!_isRunning || _currentTime <= MinCount)
+        if (!_isRunning)
             return;
 
-        _currentTime -= deltaTime;
+        CurrentTime.Value -= deltaTime;
 
-        if (_currentTime <= MinCount)
+        if (CurrentTime.Value <= 0f)
         {
-            _currentTime = MinCount;
-            _isRunning = false;
-            OnTimerEnded?.Invoke();
+            CurrentTime.Value = 0f;
+            Stop(); 
         }
-
-        OnTimerChanged?.Invoke();
     }
 
     public void Start()
@@ -56,8 +52,6 @@ public class Timer
 
     public void Reset()
     {
-        _currentTime = _duration;
-        _isRunning = false;
-        OnTimerChanged?.Invoke();
+        CurrentTime.Value = _initialTime;
     }
 }

@@ -24,7 +24,7 @@ public class TimerSliderView : TimerView
     
     protected override void UpdateUI()
     {
-        float current = _timer.CurrentTime;
+        float current = _timer.CurrentTime.Value;
         
         _timerText.text = Mathf.CeilToInt(current).ToString();
         _timerSlider.value = current;

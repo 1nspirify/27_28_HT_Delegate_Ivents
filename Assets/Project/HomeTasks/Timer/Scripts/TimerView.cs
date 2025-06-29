@@ -3,24 +3,24 @@ using UnityEngine;
 public class TimerView : MonoBehaviour
 {
     protected Timer _timer;
-    private void OnTimerChanged()
-    {
-        UpdateUI();
-    }
 
     public virtual void Initialize(Timer timer)
     {
         _timer = timer;
-        _timer.OnTimerChanged += OnTimerChanged;
+        _timer.CurrentTime.Changed += OnCurrentTimeChanged;
     }
     
-    public void OnDestroy()
+    private void OnDestroy()
     {
-        _timer.OnTimerChanged -= OnTimerChanged;
+        if (_timer != null)
+            _timer.CurrentTime.Changed -= OnCurrentTimeChanged;
     }
-
     protected virtual void UpdateUI()
     {
     }
-
+    
+    private void OnCurrentTimeChanged(float oldTime, float newTime)
+    {
+        UpdateUI();
+    }
 }

@@ -24,6 +24,13 @@ public class WalletExample : MonoBehaviour
     private void Start()
     {
         _walletView.Initialize(_wallet);
+        foreach (Wallet.CurrencyType type in Enum.GetValues(typeof(Wallet.CurrencyType)))
+        {
+            _wallet.GetReactive(type).Changed += (oldValue, newValue) =>
+            {
+                Debug.Log($"[{type}] changed: {oldValue} -> {newValue}");
+            };
+        }
     }
 
     private void Update()
