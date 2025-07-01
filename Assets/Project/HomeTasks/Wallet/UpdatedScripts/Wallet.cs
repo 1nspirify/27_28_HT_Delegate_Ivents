@@ -36,7 +36,7 @@ public class Wallet
         return _currencies[currency].Value;
     }
     
-    public ReactiveVariable<int> GetReactive(CurrencyType currency)
+    public IReadOnlyVariable<int> GetReactive(CurrencyType currency)
     {
         return _currencies[currency];
     }

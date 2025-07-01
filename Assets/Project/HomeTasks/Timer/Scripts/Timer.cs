@@ -3,19 +3,18 @@ using System;
 public class Timer
 {
     private const float MinCount = 0f;
-    public event Action OnTimerChanged;
-    public ReactiveVariable<float> CurrentTime { get; } = new (0f);
 
-    private float _duration;
-    private float _currentTime;
-    private bool _isRunning;
+    private ReactiveVariable<float> _currentTime = new(0f);
+    public IReadOnlyVariable<float> CurrentTime => _currentTime;
+
     private float _initialTime;
-    public bool IsRunning => _isRunning;
+    private bool _isRunning;
+    // public bool IsRunning => _isRunning;
 
     public Timer(float duration)
     {
         _initialTime = duration;
-        CurrentTime.Value = duration;
+        _currentTime.Value = duration;
         _isRunning = false;
     }
 
@@ -24,11 +23,11 @@ public class Timer
         if (!_isRunning)
             return;
 
-        CurrentTime.Value -= deltaTime;
+        _currentTime.Value -= deltaTime;
 
-        if (CurrentTime.Value <= 0f)
+        if (_currentTime.Value <= 0f)
         {
-            CurrentTime.Value = 0f;
+            _currentTime.Value = 0f;
             Stop(); 
         }
     }
@@ -45,13 +44,12 @@ public class Timer
 
     public void Stop()
     {
-        _currentTime = MinCount;
+        _currentTime.Value = MinCount;
         _isRunning = false;
-        OnTimerChanged?.Invoke();
     }
 
     public void Reset()
     {
-        CurrentTime.Value = _initialTime;
+        _currentTime.Value = _initialTime;
     }
 }
